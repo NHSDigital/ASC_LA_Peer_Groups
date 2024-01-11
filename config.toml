@@ -1,0 +1,65 @@
+[LOCATION]
+input_dir = "C:/LOCATION_NAME"
+output_dir = "C:/LOCATION_NAME"
+hash_length = 5 
+
+[LOCAL_AUTHORITY]
+la_code = "UTLA22CD"
+la_name = "UTLA22NM"
+
+#-----------------
+# MODEL PARAMETERS
+#-----------------
+[MODEL_OUTPUT]
+n_peers = 15
+
+[FEATURE_WEIGHTS]
+# These are the features the pipeline will use.
+# Please use the format:
+# "Feature Name" = weight (must be between 0 and 1)
+# Use a zero to not include the feature in analysis
+"Over 15 Population" = 1
+"85 and over Population %" = 1
+"Aged 65 to 84 Population %" = 0
+"black african %" = 0.5
+"black caribbean %" = 0.5
+"bangladeshi %" = 0.5
+"indian %" = 0.5
+"chinese %" = 0.5
+"pakistani %" = 0.5
+"mixed %" = 0
+"white %" = 0
+"home_owners %" = 0
+"social_renters %" = 1
+"student %" = 1
+"routine_manual %" = 0
+"low_english_proficiency %" = 1
+"People per square km" = 1
+"higher_level_qualifications %" = 1
+"few_rooms %" = 0
+"Distance to Sea (km)" = 0.5
+"Sparsity (% population living in low density areas)" = 1
+
+
+[CUSTOM_TRANSFORMATIONS]
+# empty, but allows override of transformations
+# The following values should be used:"
+# "" - No Transformation
+# "yj" - Yeo johnson
+# "sqrr" - Square Root
+# "log" - log
+# "squared" - squared
+# "bc" - boxcox (values must be > 0)
+# "recip_sqrr"- reciprocal square root (values must be > 0)
+# "recip" - reciprocal (values must be > 0)
+#
+# Features should be mapped to the desired transformation
+# e.g.
+# "student %" = "bc"
+
+
+[REMOVE_LAS]
+# Array of local authorities to be ignored in analysis
+# Please use the local authority name, using the la_name field defined above
+# E.g. las_to_remove = ["Isles of Scilly", "City of London"]
+las_to_remove = ["Isles of Scilly", "City of London"]
