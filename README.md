@@ -23,10 +23,10 @@ We have calculated a metric of similarity (Euclidean distance) based on standard
 
 ### Set up a virtual environment
 
-Clone this project and ensure you're in the root directory, LA_NEAREST_NEIGHBOURS. You can change your current directory in the terminal e.g.
+Clone this project and ensure you're in the root directory, ASC_LA_Peer_Groups. You can change your current directory in the terminal e.g.
 
 ```bash
-cd LA_NEAREST_NEIGHBOURS
+cd ASC_LA_Peer_Groups
 ```
 
 Set up a virtual environment and install requirements:
