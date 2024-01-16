@@ -142,6 +142,3 @@ dmypy.json
 .pyre/
 
 ipython.html
-
-#outputs
-Top_10s.csv
