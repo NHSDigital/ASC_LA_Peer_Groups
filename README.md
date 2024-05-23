@@ -267,7 +267,7 @@ pytest
 
 ## Contributors
 
-This codebase was originally developed by [Harriet Sands](https://github.com/harrietrs) and [Will Poulett](https://github.com/willpoulett), with help from the Adult Social Care Team at NHS England.
+This codebase was originally developed by data scientists at NHS England: [Harriet Sands](https://github.com/harrietrs) and [Will Poulett](https://github.com/willpoulett), with help from the Adult Social Care Team at NHS England.
 
 ## Licence
 
