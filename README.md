@@ -265,6 +265,10 @@ You can also run the testing suite once these requirements have been installed:
 pytest
 ```
 
+## Contributors
+
+This codebase was originally developed by data scientists at NHS England: [Harriet Sands](https://github.com/harrietrs) and [Will Poulett](https://github.com/willpoulett), with help from the Adult Social Care Team at NHS England.
+
 ## Licence
 
 This codebase is released under the MIT License. This covers both the codebase and any sample code in the documentation.
