@@ -154,7 +154,7 @@ python main.py
 
 If you want to adjust the weights of any of the inputs features (including adding or removing features), change the UTLA definitions etc., make the required edits in the `config.toml`.
 
-_(Optional)_ Adding a custom hash:
+**_(Optional)_ Adding a custom hash:**
 
 To make your pipeline run easier to identify, it is possible to pass a custom hash to name your pipeline. This means log names and your output pipeline folder name will include the hash.
 
