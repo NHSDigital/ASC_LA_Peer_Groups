@@ -215,7 +215,6 @@ If there are boundary changes, LSOA_AREA_KM.csv will need updating (if there is 
 
 ```text
 | .gitignore                <- ignores data and virtual environment files
-| .pre-commit-config.yaml   <- configuration for pre-commit hooks (optional, see above)
 | config.toml               <- options for modelling, e.g. output location, k etc.
 | requirements.txt          <- python libraries required
 | dev_requirements.txt      <- python libraries required for development (optional, includes linting libraries)
@@ -223,7 +222,7 @@ If there are boundary changes, LSOA_AREA_KM.csv will need updating (if there is 
 |
 +---reports                 <- This is a placeholder which the pipeline populates with report outputs (e.g. histograms showing feature distributions)
 |
-+---outputs                 <- This is a placeholder which the pipeline populates with output data
++---output                 <- This is a placeholder which the pipeline populates with output data
 |
 | main.py                   <- Runs the pipeline
 |
@@ -246,12 +245,11 @@ If there are boundary changes, LSOA_AREA_KM.csv will need updating (if there is 
 
 ## Developing the pipeline
 
-_(Optional)_ Install dev requirements and setup pre-commit hooks:
+_(Optional)_ Install dev requirements:
 
 
 ```bash
 pip install -r dev_requirements.txt
-pre-commit install
 ```
 
 You can also run the testing suite once these requirements have been installed:
