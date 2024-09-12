@@ -139,9 +139,6 @@ Data files should be downloaded and stored to the location specified in `config.
     |-------------|-------------------|-----------|---------------|
     | E01012052   |Middlesbrough 014D | E06000002 | Middlesbrough |
 
-    | Save as file name | Source |
-    | ----------------- | ------ |
-
 
 ### Running the pipeline
 
