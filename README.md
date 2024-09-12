@@ -188,11 +188,11 @@ Interim data processing produces files saved to the `data/` directory- these are
 
 ### Updating the lookup file
 
-To change your LSOA to UTLA lookup, copy across the new lookup to the location in `config.toml`, ensuring to give it a unique name ending with ".csv". Ensure the new lookup has no blank space above the headers, and make a note of the header names.
+The latest lookup can be found here: https://www.data.gov.uk/dataset/801d40f6-fa98-40ef-ba16-0193ef04cff0/lsoa-2021-to-utlas-april-2023-best-fit-lookup-in-ew
 
-Navigate to `src\params.py`, go to the "Lookup Pathways and Parameters" section and change the name of the `LSOA_UTLA_lookup_file` to the new lookup. If the LSOA code column name in the new lookup has changed, you will also need to update `LSOA_code` to the corresponding column name.
+To change your LSOA to UTLA lookup, copy across the new lookup to the input_dir that you specified in `config.toml`, ensuring to give it a unique name ending with ".csv". Ensure the new lookup has no blank space above the headers, and make a note of the header names.
 
-If you have updated `LSOA_code`, you will need to check the rest of `src\params` for references to the old LSOA code. For example, in the ethnicity section of `params.py`.
+Navigate to `src\params.py`, go to the "Data File Names" section and change the name of the `LSOA_UTLA_lookup_file` to the new lookup file. If the LSOA code column name in the new lookup has changed, you will also need to update `LSOA_code` (in the "Pathway Parameters" section) to the corresponding column name.
 
 Navigate to `config.toml` and ensure the `la_code` and `la_name` match the names of the relevant columns in your new lookup.
 
