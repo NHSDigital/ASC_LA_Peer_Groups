@@ -129,7 +129,7 @@ Data files should be downloaded and stored to the location specified in `config.
 | population_data.csv | https://www.nomisweb.co.uk/output/census/2021/census2021-ts007a.zip | Download the zip folder. Rename the csv ending in "lsoa" to "population_data" |
 | qualification_level.csv | https://www.nomisweb.co.uk/output/census/2021/census2021-ts067.zip | Download the zip folder. Rename the csv ending in "lsoa" to "qualification_level" |
 | rooms.csv | https://www.nomisweb.co.uk/output/census/2021/census2021-ts051.zip | Download the zip folder. Rename the csv ending in "lsoa" to "rooms" |
-| LSOA21_to_UTLA22.csv | https://geoportal.statistics.gov.uk/datasets/ons::lower-layer-super-output-area-2021-to-upper-tier-local-authorities-2022-lookup-in-england-and-wales-v2/explore | Click the download button, select the CSV download option. Rename this file to LSOA21_to_UTLA22 |
+| LSOA21_to_UTLA22.csv | https://www.data.gov.uk/dataset/14d8efd0-b14c-46ac-b2fe-a7892ea51ca5/lsoa-2021-to-utlas-december-2022-best-fit-lookup-in-ew-v2 | Under "Data links", click the CSV hyperlink to download the file. Rename this file to LSOA21_to_UTLA22 |
 
 **A note on lookups:** The final CSV file listed above, `LSOA21_to_UTLA22.csv` , maps LSOAs to UTLAs (local authorities).
     
