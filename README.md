@@ -184,13 +184,21 @@ Final outputs and reports are saved to a pipeline folder saved in the output dir
 
 Interim data processing produces files saved to the `data/` directory- these are NOT copied to the pipeline output location.
 
-## Updating and adding new data
+## Updating the data/lookup files
 
-### Updating the lookup file
+New data and lookups can be added easily to the pipeline. All new data and lookups should be stored in the input directory, as specified in the config file as `input_dir`.
 
-The latest lookup can be found here: https://www.data.gov.uk/dataset/801d40f6-fa98-40ef-ba16-0193ef04cff0/lsoa-2021-to-utlas-april-2023-best-fit-lookup-in-ew
+First check that the format of the new/updated file matches the old one (see the earlier Data section for links). Move the new file into the input directory (you may want to archive the old file). 
 
-To change your LSOA to UTLA lookup, copy across the new lookup to the input_dir that you specified in `config.toml`, ensuring to give it a unique name ending with ".csv". Ensure the new lookup has no blank space above the headers, and make a note of the header names.
+In `src/params.py`, check the "Data File Names" section, and ensure the name of the replaced file matches the corresponding file name in the params. Further to this, check the column values in the “Columns” section of params for the feature you have changed, and ensure these match the columns within the new data.
+
+If updating the lookup file, open `config.toml` and check that `la_code` and `la_name` point to the correct columns in the new lookup.
+
+### Example: updating the lookup file
+
+As of 2024 the latest lookup can be found here: https://www.data.gov.uk/dataset/801d40f6-fa98-40ef-ba16-0193ef04cff0/lsoa-2021-to-utlas-april-2023-best-fit-lookup-in-ew
+
+To change your LSOA to UTLA lookup, copy across the new lookup to the input directory, ensuring to give it a unique name and that it is saved as a CSV. Ensure the new lookup has no blank space above the headers, and make a note of the header names.
 
 Navigate to `src\params.py`, go to the "Data File Names" section and change the name of the `LSOA_UTLA_lookup_file` to the new lookup file. If the LSOA code column name in the new lookup has changed, you will also need to update `LSOA_code` (in the "Pathway Parameters" section) to the corresponding column name.
 
@@ -198,23 +206,10 @@ Navigate to `config.toml` and ensure the `la_code` and `la_name` match the names
 
 You can now run the pipeline with the updated lookup.
 
-### Adding New Data
-
-New data and lookups can be added easily to the pipeline. All new data and lookups should be stored in the input directory, as specified in the config file as ‘input_dir’. Data files should all be in a data\input\raw folder from the input directory and look up files should all be in a `data\lookups\raw` folder from the input directory.
-
-To add new data to the pipeline, navigate to the `data\input\raw` folder within the input storage. replacing an existing csv file, ensure to either archive/delete the old file, or rename the new file with a unique name. The new file should be checked to ensure it is in the same format as the old file.
-
-In `src/params.py`, check the “Data File Names” section, and ensure the name of the replaced file matches the corresponding file name in the params.  Further to this, check the column values in the “Columns” section of params for the feature you have changed, and ensure these match the columns within the new data.
-
 ### Boundary changes
 
-The following steps will be needed to update the code to include the latest council borders:
+If there are boundary changes, LSOA_AREA_KM.csv will need updating (if there is an available update), along with the LSOA to UTLA lookup. See the above section on how to update the data/lookup. The code will then use the new boundary definitions when calculating the Euclidean Distances for each of the variables.
 
-1. Download the latest LSOA data, the links are provided above.
-2. Check all column names match, if using the April 23 ons file, 'UTLA23NM' will need to be renamed to 'UTLA22NM'.
-3. Replace the files 'LSOA_AREA_KM' and 'LSOA21_to_UTLA22' in the lookup folder.
-
-The code will now use the new boundary definitions when calculating the Euclidean Distances for each of the variables.
 
 ## Project structure
 
