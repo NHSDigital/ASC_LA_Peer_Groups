@@ -1,6 +1,7 @@
 """
 Pathway Parameters
 """
+
 data_folder = "data"
 output_folder = "output"
 raw_folder = "raw"
@@ -94,7 +95,7 @@ pop_density_lsoa_column = "People per square km (LSOA)"
 # ethnicity
 ethnicity_geo_col = "geography code"
 ethnic_group_cols_to_keep = {
-    "LSOA21CD": "geography code",
+    LSOA_code: "geography code",
     "total": "Ethnic group: Total: All usual residents",
     "black african": "Ethnic group: Black, Black British, Black Welsh, Caribbean or African: African",
     "black caribbean": "Ethnic group: Black, Black British, Black Welsh, Caribbean or African: Caribbean",

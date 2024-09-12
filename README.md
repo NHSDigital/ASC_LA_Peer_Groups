@@ -129,7 +129,7 @@ Data files should be downloaded and stored to the location specified in `config.
 | population_data.csv | https://www.nomisweb.co.uk/output/census/2021/census2021-ts007a.zip | Download the zip folder. Rename the csv ending in "lsoa" to "population_data" |
 | qualification_level.csv | https://www.nomisweb.co.uk/output/census/2021/census2021-ts067.zip | Download the zip folder. Rename the csv ending in "lsoa" to "qualification_level" |
 | rooms.csv | https://www.nomisweb.co.uk/output/census/2021/census2021-ts051.zip | Download the zip folder. Rename the csv ending in "lsoa" to "rooms" |
-| LSOA21_to_UTLA22.csv | https://geoportal.statistics.gov.uk/datasets/ons::lower-layer-super-output-area-2021-to-upper-tier-local-authorities-2022-lookup-in-england-and-wales-v2/explore | Click the download button, select the CSV download option. Rename this file to LSOA21_to_UTLA22 |
+| LSOA21_to_UTLA22.csv | https://www.data.gov.uk/dataset/14d8efd0-b14c-46ac-b2fe-a7892ea51ca5/lsoa-2021-to-utlas-december-2022-best-fit-lookup-in-ew-v2 | Under "Data links", click the CSV hyperlink to download the file. Rename this file to LSOA21_to_UTLA22 |
 
 **A note on lookups:** The final CSV file listed above, `LSOA21_to_UTLA22.csv` , maps LSOAs to UTLAs (local authorities).
     
@@ -138,9 +138,6 @@ Data files should be downloaded and stored to the location specified in `config.
     | LSOA21_CODE | LSOA21_NAME       | UTLA_CODE | UTLA_NAME     |
     |-------------|-------------------|-----------|---------------|
     | E01012052   |Middlesbrough 014D | E06000002 | Middlesbrough |
-
-    | Save as file name | Source |
-    | ----------------- | ------ |
 
 
 ### Running the pipeline
@@ -157,7 +154,7 @@ python main.py
 
 If you want to adjust the weights of any of the inputs features (including adding or removing features), change the UTLA definitions etc., make the required edits in the `config.toml`.
 
-_(Optional)_ Adding a custom hash:
+**_(Optional)_ Adding a custom hash:**
 
 To make your pipeline run easier to identify, it is possible to pass a custom hash to name your pipeline. This means log names and your output pipeline folder name will include the hash.
 
@@ -184,43 +181,46 @@ Final outputs and reports are saved to a pipeline folder saved in the output dir
 
 Interim data processing produces files saved to the `data/` directory- these are NOT copied to the pipeline output location.
 
-## Updating and adding new data
+## Updating the data/lookup files
 
-### Updating the lookup file
+New data and lookups can be added easily to the pipeline. All new data and lookups should be stored in the input directory, as specified in the config file as `input_dir`.
 
-To change your LSOA to UTLA lookup, copy across the new lookup to the location in `config.toml`, ensuring to give it a unique name ending with ".csv". Ensure the new lookup has no blank space above the headers, and make a note of the header names.
+First check that the format of the new/updated file matches the old one (see the earlier Data section for links). Move the new file into the input directory (you may want to archive the old file). 
 
-Navigate to `src\params.py`, go to the "Lookup Pathways and Parameters" section and change the name of the `LSOA_UTLA_lookup_file` to the new lookup. If the LSOA code column name in the new lookup has changed, you will also need to update `LSOA_code` to the corresponding column name.
+In `src/params.py`, check the "Data File Names" section, and ensure the name of the replaced file matches the corresponding file name in the params. Further to this, check the column values in the “Columns” section of params for the feature you have changed, and ensure these match the columns within the new data.
 
-If you have updated `LSOA_code`, you will need to check the rest of `src\params` for references to the old LSOA code. For example, in the ethnicity section of `params.py`.
+If updating the lookup file, open `config.toml` and check that `la_code` and `la_name` point to the correct columns in the new lookup.
 
-Navigate to `config.toml` and ensure the `la_code` and `la_name` match the names of the relevant columns in your new lookup.
+### Example: updating the LSOA to UTLA lookup
+
+As of 2024 the latest lookup can be found here: https://www.data.gov.uk/dataset/801d40f6-fa98-40ef-ba16-0193ef04cff0/lsoa-2021-to-utlas-april-2023-best-fit-lookup-in-ew
+
+Copy across the new lookup to the input directory, ensure it has a unique name (e.g. LSOA21_to_UTLA23) and that it is saved as a CSV. Ensure the new lookup has no blank space above the headers, and make a note of the header names.
+
+Navigate to `src\params.py`, go to the "Data File Names" section and change the name of the `LSOA_UTLA_lookup_file` to the new lookup file e.g.
+```
+LSOA_UTLA_lookup_file = "LSOA21_to_UTLA23.csv"
+```
+
+ If the LSOA code column name in the new lookup has changed, you will also need to update `LSOA_code` (in the "Pathway Parameters" section) to point to the correct column name.
+
+Navigate to `config.toml` and ensure the `la_code` and `la_name` match the names of the relevant columns in your new lookup e.g.
+```
+la_code = "UTLA23CD"
+la_name = "UTLA23NM"
+```
 
 You can now run the pipeline with the updated lookup.
 
-### Adding New Data
-
-New data and lookups can be added easily to the pipeline. All new data and lookups should be stored in the input directory, as specified in the config file as ‘input_dir’. Data files should all be in a data\input\raw folder from the input directory and look up files should all be in a `data\lookups\raw` folder from the input directory.
-
-To add new data to the pipeline, navigate to the `data\input\raw` folder within the input storage. replacing an existing csv file, ensure to either archive/delete the old file, or rename the new file with a unique name. The new file should be checked to ensure it is in the same format as the old file.
-
-In `src/params.py`, check the “Data File Names” section, and ensure the name of the replaced file matches the corresponding file name in the params.  Further to this, check the column values in the “Columns” section of params for the feature you have changed, and ensure these match the columns within the new data.
-
 ### Boundary changes
 
-The following steps will be needed to update the code to include the latest council borders:
+If there are boundary changes, LSOA_AREA_KM.csv will need updating (if there is an available update), along with the LSOA to UTLA lookup. See the above section on how to update the data/lookup. The code will then use the new boundary definitions when calculating the Euclidean Distances for each of the variables.
 
-1. Download the latest LSOA data, the links are provided above.
-2. Check all column names match, if using the April 23 ons file, 'UTLA23NM' will need to be renamed to 'UTLA22NM'.
-3. Replace the files 'LSOA_AREA_KM' and 'LSOA21_to_UTLA22' in the lookup folder.
-
-The code will now use the new boundary definitions when calculating the Euclidean Distances for each of the variables.
 
 ## Project structure
 
 ```text
 | .gitignore                <- ignores data and virtual environment files
-| .pre-commit-config.yaml   <- configuration for pre-commit hooks (optional, see above)
 | config.toml               <- options for modelling, e.g. output location, k etc.
 | requirements.txt          <- python libraries required
 | dev_requirements.txt      <- python libraries required for development (optional, includes linting libraries)
@@ -228,7 +228,7 @@ The code will now use the new boundary definitions when calculating the Euclidea
 |
 +---reports                 <- This is a placeholder which the pipeline populates with report outputs (e.g. histograms showing feature distributions)
 |
-+---outputs                 <- This is a placeholder which the pipeline populates with output data
++---output                 <- This is a placeholder which the pipeline populates with output data
 |
 | main.py                   <- Runs the pipeline
 |
@@ -251,12 +251,11 @@ The code will now use the new boundary definitions when calculating the Euclidea
 
 ## Developing the pipeline
 
-_(Optional)_ Install dev requirements and setup pre-commit hooks:
+_(Optional)_ Install dev requirements:
 
 
 ```bash
 pip install -r dev_requirements.txt
-pre-commit install
 ```
 
 You can also run the testing suite once these requirements have been installed:
